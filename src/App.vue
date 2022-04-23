@@ -1,5 +1,7 @@
 <template>
   <div>
+    <ModalPage v-if="isModalOpen" />
+
     <nav class="nav-container">
       <div class="nav">
         <a class="logo" href="#">LOGO</a>
@@ -19,7 +21,7 @@
     </div>
 
     <div class="item-container">
-      <div class="item-list" v-for="(item, i) in items" :key="i">
+      <div @click="isModalOpen = true" class="item-list" v-for="(item, i) in items" :key="i">
         <ul class="item">
           <img :src="require(`./assets/${item.img}.jpg`)" alt="" />
           <li class="item-name">{{ item.title }}</li>
@@ -35,14 +37,18 @@
 
 <script>
 import item from './assets/product.js';
+import ModalPage from './components/ModalPage.vue';
 
 export default {
   name: 'App',
-  components: {},
+  components: {
+    ModalPage,
+  },
   data() {
     return {
       menu: ['Home', 'About', 'menu3', 'menu4'],
       items: item,
+      isModalOpen: false,
     };
   },
   methods: {},
@@ -60,7 +66,9 @@ export default {
 
 body,
 h1,
-div,
+h2,
+h3,
+p div,
 ul {
   margin: 0;
   padding: 0;
@@ -75,7 +83,7 @@ li {
 }
 
 .nav-container {
-  background: steelblue;
+  background: #2c3e50;
   color: white;
   margin: 0 auto;
 }
@@ -167,8 +175,14 @@ li {
   padding: 10px;
   border: 1px solid #eee;
   border-radius: 5px;
-  box-shadow: 5px 5px 7px #eee;
   height: 100%;
+  transition: all 0.5s;
+  transition-delay: 0.1s;
+}
+
+.item-list:hover {
+  transform: scale(1.03);
+  box-shadow: 2px 2px 10px #eee;
 }
 
 .item {
@@ -180,7 +194,10 @@ li {
   width: 100%;
   display: block;
   border-radius: 5px;
-  height: 100%;
+  height: 400px;
+  margin: 0 auto;
+  object-fit: cover;
+  object-position: center;
 }
 
 .item-name {
