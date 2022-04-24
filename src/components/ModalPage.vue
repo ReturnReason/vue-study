@@ -1,9 +1,9 @@
 <template>
   <div class="modal-bg">
     <div class="modal-container">
-      <h2 class="modal-title">모달창 제목</h2>
-      <p class="modal-text">모달입니다.</p>
-      <button class="btn modal-close">닫기</button>
+      <h2 class="modal-title">{{ items[index].title }}</h2>
+      <p class="modal-text">모달창입니다.</p>
+      <button @click="$emit('modalClose')" class="btn modal-close">닫기</button>
     </div>
   </div>
 </template>
@@ -13,6 +13,10 @@ export default {
   name: 'ModalPage',
   data() {},
   methods: {},
+  props: {
+    items: Array,
+    index: Number,
+  },
 };
 </script>
 
@@ -34,6 +38,7 @@ export default {
   border-radius: 5px;
   margin: 0 auto;
   padding: 20px;
+  height: auto;
 }
 
 .modal-title {

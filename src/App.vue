@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ModalPage v-if="isModalOpen" />
+    <ModalPage :items="items" :index="index" @modalClose="isModalOpen = false" v-if="isModalOpen" />
 
     <nav class="nav-container">
       <div class="nav">
@@ -17,11 +17,19 @@
     </div>
 
     <div>
-      <p class="text-add-item">신규 상품 추가</p>
+      <p @click="click" class="text-add-item">신규 상품 추가</p>
     </div>
 
     <div class="item-container">
-      <div @click="isModalOpen = true" class="item-list" v-for="(item, i) in items" :key="i">
+      <div
+        @click="
+          isModalOpen = true;
+          index = i;
+        "
+        class="item-list"
+        v-for="(item, i) in items"
+        :key="i"
+      >
         <ul class="item">
           <img :src="require(`./assets/${item.img}.jpg`)" alt="" />
           <li class="item-name">{{ item.title }}</li>
@@ -49,9 +57,15 @@ export default {
       menu: ['Home', 'About', 'menu3', 'menu4'],
       items: item,
       isModalOpen: false,
+      index: 0,
     };
   },
-  methods: {},
+  methods: {
+    click: function () {
+      console.log('클릭');
+    },
+  },
+  props: {},
 };
 </script>
 
