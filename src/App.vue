@@ -1,6 +1,8 @@
 <template>
   <div>
-    <ModalPage :items="items" :index="index" @modalClose="isModalOpen = false" v-if="isModalOpen" />
+    <transition name="fade">
+      <ModalPage :items="items" :index="index" @modalClose="isModalOpen = false" v-if="isModalOpen" />
+    </transition>
 
     <nav class="nav-container">
       <div class="nav">
@@ -94,6 +96,34 @@ div {
 
 li {
   list-style: none;
+}
+
+/* 모달 페이드 */
+.fade-enter-from {
+  /* 시작시 효과 */
+  opacity: 0;
+}
+
+.fade-enter-active {
+  /* 전체 단계에서 적용될 부분*/
+  transition: all 1s;
+}
+
+.fade-enter-to {
+  /* 끝나는 효과 */
+  opacity: 1;
+}
+
+.fade-leave-from {
+  opacity: 1;
+}
+
+.fade-leave-active {
+  transition: all 1s;
+}
+
+.fade-leave-to {
+  opacity: 0;
 }
 
 .nav-container {
